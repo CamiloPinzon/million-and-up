@@ -9,7 +9,7 @@ body {
 .modal-window {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .9);
   position: absolute;
   display: flex;
   justify-content: center;
@@ -18,10 +18,25 @@ body {
 
 .modal-content {
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hide-modal {
+  display: none;
 }
 
 .close-icon {
   cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  margin-block: 10px;
+}
+
+.modal-info {
+  background-color: #FFF;
+  border-radius: 25px;
+  padding: 20px;
 }
 
 .header-container {
