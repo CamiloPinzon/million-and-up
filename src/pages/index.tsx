@@ -13,11 +13,26 @@ import {
 	setCoinInfo,
 } from "../store/actions/cryptoActions";
 
+import { coinInfoT } from "@/store/actions/types";
+import { CoinT } from "@/store/actions/types";
+
+type stateTypeT = {
+	crypto: {
+		cryptoData: CoinT;
+		isModalOpen: boolean;
+		coinInfo: coinInfoT;
+	};
+};
+
 const Home = () => {
 	const dispatch = useDispatch();
-	const cryptoData = useSelector((state) => state.crypto.cryptoData);
-	const isModalOpen = useSelector((state) => state.crypto.isModalOpen);
-	const coinInfo = useSelector((state) => state.crypto.coinInfo);
+	const cryptoData = useSelector(
+		(state: stateTypeT) => state.crypto.cryptoData
+	);
+	const isModalOpen = useSelector(
+		(state: stateTypeT) => state.crypto.isModalOpen
+	);
+	const coinInfo = useSelector((state: stateTypeT) => state.crypto.coinInfo);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -56,7 +71,6 @@ const Home = () => {
 				coinInfo={coinInfo}
 			/>
 			<Header />
-			<Search />
 			<CurrencyList
 				cryptoData={cryptoData}
 				handlerCurrencyInfo={handleCurrencyInfo}

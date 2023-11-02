@@ -1,12 +1,6 @@
-import CloseIcon from "@/assets/images/close";
+import { coinInfoT } from "@/store/actions/types";
 
-type coinInfoT = {
-	symbol: string;
-	name: string;
-	rank: number;
-	price_usd: string;
-	usd_exchange: number;
-};
+import CloseIcon from "@/assets/images/close";
 
 type ModalPropsT = {
 	isModalOpen: boolean;

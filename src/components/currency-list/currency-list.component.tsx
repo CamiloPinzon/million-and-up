@@ -1,10 +1,6 @@
-import TriangleIcon from "@/assets/images/triangle";
+import { CoinT } from "@/store/actions/types";
 
-type CoinT = {
-	id: string;
-	symbol: string;
-	name: string;
-};
+import TriangleIcon from "@/assets/images/triangle";
 
 type CurrencyPropsT = {
 	cryptoData: CoinT[];
