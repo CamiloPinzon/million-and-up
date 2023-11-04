@@ -1,15 +1,10 @@
-import { useContext } from "react";
-
 import { useModal } from "@/context/modal.context";
-import { CoinInfoT } from "@/types";
 import CloseIcon from "@/assets/images/close";
 
-interface ModalInterface {
-	coinInfo: CoinInfoT;
-}
+const Modal = () => {
+	const { isModalOpen, toggleModalOpen, selectedCrypto } = useModal();
 
-const Modal = ({ coinInfo }: ModalInterface) => {
-	const { isModalOpen, toggleModalOpen } = useModal();
+	const { symbol, name, rank, price_usd } = selectedCrypto;
 
 	return (
 		<div className={`modal-window ${!isModalOpen ? "hide-modal" : ""}`}>
@@ -18,11 +13,11 @@ const Modal = ({ coinInfo }: ModalInterface) => {
 					<CloseIcon />
 				</div>
 				<div className="modal-info">
-					<h2>{`${coinInfo.name} - ${coinInfo.symbol}`}</h2>
+					<h2>{`${name} - ${symbol}`}</h2>
 					<div className="info-content">
 						<ul>
-							<li>Rank: {coinInfo.rank}</li>
-							<li>Price in USD: {coinInfo.price_usd}</li>
+							<li>Rank: {rank}</li>
+							<li>Price in USD: {price_usd}</li>
 						</ul>
 					</div>
 				</div>

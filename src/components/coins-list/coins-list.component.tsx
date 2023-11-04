@@ -1,11 +1,19 @@
 import { useCryptoData } from "@/context/crypto-data.context";
-
-import { CryptoDataContextType } from "@/types";
+import { useModal } from "@/context/modal.context";
 
 import TriangleIcon from "@/assets/images/triangle";
 
 const CoinsList = (): any => {
 	const { data } = useCryptoData();
+	const { toggleModalOpen, addCrypto } = useModal();
+
+	const handleModalOpen = () => {
+		toggleModalOpen();
+	};
+
+	const handleAddCrypto = (id: string) => {
+		addCrypto(id);
+	};
 
 	return (
 		<div className="currency-container">
@@ -16,7 +24,12 @@ const CoinsList = (): any => {
 				{data.map((crypto) => {
 					const { id, name, symbol } = crypto;
 					return (
-						<div key={id} className="currency-item" title={name}>
+						<div
+							key={id}
+							className="currency-item"
+							title={name}
+							onClick={() => handleAddCrypto(id)}
+						>
 							{symbol}
 						</div>
 					);
