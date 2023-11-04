@@ -1,15 +1,21 @@
-import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
-
-import store from "@/store/store";
-
 import "@/styles/globals.css";
+import type { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }: AppProps) {
+import { ModalProvider } from "@/context/modal.context";
+import { PagesProvider } from "@/context/pages.context";
+import { CryptoDataProvider } from "@/context/crypto-data.context";
+
+export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<Provider store={store}>
-			<Component {...pageProps} />
-		</Provider>
+		<>
+			<CryptoDataProvider>
+				<ModalProvider>
+					<PagesProvider>
+						<Component {...pageProps} />
+					</PagesProvider>
+				</ModalProvider>
+			</CryptoDataProvider>
+		</>
 	);
 }
 
