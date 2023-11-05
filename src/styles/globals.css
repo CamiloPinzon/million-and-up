@@ -52,11 +52,12 @@ body {
   align-items: center;
 }
 
-.currency-container {
+.paginator-container {
   display: flex;
-  flex-direction: row;
+  column-gap: 20px;
   align-items: center;
-  padding: 30px;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 .cryptos-container {

@@ -24,7 +24,7 @@ export type SelectedContextType = {
 };
 
 export type CryptoDataContextType = {
-	data: [
+	cryptoData: [
 		{
 			id: string;
 			symbol: string;
@@ -44,6 +44,11 @@ export type CryptoDataContextType = {
 			msupply: string;
 		}
 	];
+	currentPage: number;
+	totalPages: number;
+	maxLoadedPages: number;
+	nextPage: () => void;
+	prevPage: () => void;
 };
 
 export type CoinInfoT = {
@@ -80,4 +85,7 @@ export type ContextProviderProps = {
 export type PagesContextType = {
 	currentPage: number;
 	totalPages: number;
+	maxLoadedPages: number;
+	nextPage: () => void;
+	prevPage: () => void;
 };
