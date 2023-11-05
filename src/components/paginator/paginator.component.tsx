@@ -7,7 +7,9 @@ const Paginator = () => {
 	return (
 		<div className="paginator-container">
 			<div
-				className="triangle-container left-triangle"
+				className={`triangle-container left-triangle ${
+					currentPage === 0 ? "div-disabled" : ""
+				}`}
 				onClick={() => prevPage()}
 			>
 				<TriangleIcon />
@@ -16,7 +18,9 @@ const Paginator = () => {
 				<p>{`Page ${currentPage + 1} of ${totalPages}`}</p>
 			</div>
 			<div
-				className="triangle-container rigth-triangle"
+				className={`triangle-container rigth-triangle ${
+					currentPage === totalPages ? "div-disabled" : ""
+				}`}
 				onClick={() => nextPage()}
 			>
 				<TriangleIcon />

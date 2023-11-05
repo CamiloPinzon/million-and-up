@@ -4,7 +4,7 @@ import CloseIcon from "@/assets/images/close";
 const Modal = () => {
 	const { isModalOpen, toggleModalOpen, selectedCrypto } = useModal();
 
-	const { symbol, name, rank, price_usd } = selectedCrypto;
+	const { symbol, name } = selectedCrypto;
 
 	return (
 		<div className={`modal-window ${!isModalOpen ? "hide-modal" : ""}`}>
@@ -16,8 +16,46 @@ const Modal = () => {
 					<h2>{`${name} - ${symbol}`}</h2>
 					<div className="info-content">
 						<ul>
-							<li>Rank: {rank}</li>
-							<li>Price in USD: {price_usd}</li>
+							<li>
+								<b>Rank:</b> {selectedCrypto.rank}
+							</li>
+							<li>
+								<b>Price in USD:</b> {selectedCrypto.price_usd}
+							</li>
+							<li>
+								<b>Percent change 24h:</b> {selectedCrypto.percent_change_24h}
+							</li>
+							<li>
+								<b>Percent change 1h:</b> {selectedCrypto.percent_change_1h}
+							</li>
+							<li>
+								<b>Percent change 7d:</b> {selectedCrypto.percent_change_7d}
+							</li>
+							<li>
+								<b>Price btc:</b> {selectedCrypto.price_btc}
+							</li>
+							<li>
+								<b>Market cap usd:</b> {selectedCrypto.market_cap_usd}
+							</li>
+							<li>
+								<b>Volume24:</b> {selectedCrypto.volume24}
+							</li>
+							<li>
+								<b>Volume24a:</b> {selectedCrypto.volume24a}
+							</li>
+							<li>
+								<b>Csupply:</b> {selectedCrypto.csupply}
+							</li>
+							<li>
+								<b>Tsupply:</b> {selectedCrypto.tsupply}
+							</li>
+							{selectedCrypto.msupply ? (
+								<li>
+									<b>Msupply:</b> {selectedCrypto.msupply}
+								</li>
+							) : (
+								""
+							)}
 						</ul>
 					</div>
 				</div>

@@ -85,7 +85,7 @@ body {
 
 .div-disabled {
   pointer-events: none;
-  display: none;
+  opacity: .4;
 }
 
 .currency-item {
