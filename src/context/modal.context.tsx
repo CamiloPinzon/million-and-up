@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 import { ModalContextType, ContextProviderProps, CoinInfoT } from "@/types";
 
@@ -41,6 +41,30 @@ const ModalContext = createContext<ModalContextType>(modalContextDefaultValues);
 
 export const useModal = () => useContext(ModalContext);
 
+const modalReducer = (state: {}, action: { type: string; payload: any }) => {
+	const { type, payload } = action;
+
+	switch (type) {
+		case "SET_IS_MODAL_OPEN":
+			return {
+				...state,
+				isModalOpen: payload,
+			};
+		case "SET_CRYPTOS_SELECTED":
+			return {
+				...state,
+				cryptosSelected: payload,
+			};
+		case "SET_SELECTED_CRYPTO":
+			return {
+				...state,
+				selectedCrypto: payload,
+			};
+		default:
+			throw new Error(`unhandled type: ${type}`);
+	}
+};
+
 const getCryptoFromApi = (id: string) => {
 	const cryptoSelected = async () => {
 		const response = await fetch(
@@ -53,14 +77,27 @@ const getCryptoFromApi = (id: string) => {
 	return cryptoSelected();
 };
 
+const INITIAL_STATE = {
+	isModalOpen: false,
+	cryptosSelected: [],
+	selectedCrypto: {},
+};
+
 export const ModalProvider = ({ children }: ContextProviderProps) => {
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const [cryptosSelected, setCryptosSelected] = useState(
-		modalContextDefaultValues.cryptosSelected
-	);
-	const [selectedCrypto, setSelectedCrypto] = useState(
-		modalContextDefaultValues.selectedCrypto
-	);
+	const [{ isModalOpen, cryptosSelected, selectedCrypto }, dispatch] =
+		useReducer(modalReducer, INITIAL_STATE);
+
+	const setIsModalOpen = (isModalOpen: boolean) => {
+		dispatch({ type: "SET_IS_MODAL_OPEN", payload: isModalOpen });
+	};
+
+	const setCryptosSelected = (cryptosSelected: []) => {
+		dispatch({ type: "SET_CRYPTOS_SELECTED", payload: cryptosSelected });
+	};
+
+	const setSelectedCrypto = (selectedCrypto: {}) => {
+		dispatch({ type: "SET_SELECTED_CRYPTO", payload: selectedCrypto });
+	};
 
 	const toggleModalOpen = () => {
 		setIsModalOpen(!isModalOpen);
@@ -72,13 +109,11 @@ export const ModalProvider = ({ children }: ContextProviderProps) => {
 			const crypto = await getCryptoFromApi(idToAdd);
 			await setSelectedCrypto(crypto);
 			await setCryptosSelected([...cryptosSelected, crypto]);
-			console.log(crypto);
 		} else {
 			const selected = cryptosSelected.filter(
 				(crypto) => crypto.id === idToAdd
 			);
 			setSelectedCrypto(selected[0]);
-			console.log(selected);
 		}
 		toggleModalOpen();
 	};

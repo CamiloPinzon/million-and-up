@@ -1,3 +1,7 @@
 import { combineReducers } from "redux";
 
-export const rootReducer = combineReducers({});
+import { cryproDataReducer } from "./crypto-data/crypto-data.reducer";
+
+export const rootReducer = combineReducers({
+	cryptoData: cryproDataReducer,
+});

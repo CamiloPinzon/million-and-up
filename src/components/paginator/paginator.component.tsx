@@ -1,9 +1,22 @@
-import { useCryptoData } from "@/context/crypto-data.context";
+import { useSelector, useDispatch } from "react-redux";
+
+import { selectPaginationData } from "../../store/crypto-data/crypto-data.selector";
+import { setCurrentPage } from "@/store/crypto-data/crypto-data.actions";
 
 import TriangleIcon from "@/assets/images/triangle";
 
 const Paginator = () => {
-	const { currentPage, totalPages, nextPage, prevPage } = useCryptoData();
+	const dispatch = useDispatch();
+	const { currentPage, totalPages } = useSelector(selectPaginationData);
+
+	const nextPage = () => {
+		currentPage < totalPages - 1 && dispatch(setCurrentPage(currentPage + 1));
+	};
+
+	const prevPage = () => {
+		currentPage > 0 && dispatch(setCurrentPage(currentPage - 1));
+	};
+
 	return (
 		<div className="paginator-container">
 			<div

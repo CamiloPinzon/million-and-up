@@ -1,13 +1,13 @@
-import { useCryptoData } from "@/context/crypto-data.context";
+import { useSelector } from "react-redux";
+
+import { selectCryptoData } from "@/store/crypto-data/crypto-data.selector";
 import { useModal } from "@/context/modal.context";
 
-const CoinsList = (): any => {
-	const { cryptoData } = useCryptoData();
-	const { toggleModalOpen, addCrypto } = useModal();
+const CoinsList = () => {
+	const cryptoData = useSelector(selectCryptoData);
+	const data = [...cryptoData];
 
-	const handleModalOpen = () => {
-		toggleModalOpen();
-	};
+	const { addCrypto } = useModal();
 
 	const handleAddCrypto = (id: string) => {
 		addCrypto(id);
@@ -15,7 +15,7 @@ const CoinsList = (): any => {
 
 	return (
 		<div className="cryptos-container">
-			{cryptoData.map((crypto) => {
+			{data.map((crypto) => {
 				const { id, name, symbol } = crypto;
 				return (
 					<div
