@@ -1,8 +1,20 @@
-import { useModal } from "@/context/modal.context";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+	selectModalOpen,
+	selectSelectedCrypto,
+} from "@/store/crypto-data/crypto-data.selector";
+import { setIsModalOpen } from "@/store/crypto-data/crypto-data.actions";
 import CloseIcon from "@/assets/images/close";
 
 const Modal = () => {
-	const { isModalOpen, toggleModalOpen, selectedCrypto } = useModal();
+	const dispatch = useDispatch();
+	const isModalOpen = useSelector(selectModalOpen);
+	const toggleModalOpen = () => {
+		dispatch(setIsModalOpen(!isModalOpen));
+	};
+
+	const selectedCrypto = useSelector(selectSelectedCrypto);
 
 	const { symbol, name } = selectedCrypto;
 

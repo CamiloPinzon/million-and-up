@@ -4,6 +4,9 @@ const INITIAL_STATE = {
 	cryptoData: [],
 	currentPage: 0,
 	totalPages: 0,
+	isModalOpen: false,
+	cryptosSelected: [],
+	selectedCrypto: {},
 };
 
 export const cryproDataReducer = (
@@ -27,6 +30,21 @@ export const cryproDataReducer = (
 			return {
 				...state,
 				cryptoData: payload,
+			};
+		case cryptoActionTypes.SET_MODAL_OPEN:
+			return {
+				...state,
+				isModalOpen: payload,
+			};
+		case cryptoActionTypes.SET_SELECTED_CRYPTO:
+			return {
+				...state,
+				selectedCrypto: payload,
+			};
+		case cryptoActionTypes.SET_SELECTED_CRYPTOS:
+			return {
+				...state,
+				cryptosSelected: payload,
 			};
 		default:
 			return state;

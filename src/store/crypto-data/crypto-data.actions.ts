@@ -10,3 +10,12 @@ export const setCurrentPage = (currentPage: number) =>
 
 export const setCryptoData = (cryptoData: []) =>
 	createAction(cryptoActionTypes.SET_CRYPTODATA, cryptoData);
+
+export const setIsModalOpen = (isModalOpen: boolean) =>
+	createAction(cryptoActionTypes.SET_MODAL_OPEN, isModalOpen);
+
+export const setSelectedCrypto = (selectedCrypto: {}) =>
+	createAction(cryptoActionTypes.SET_SELECTED_CRYPTO, selectedCrypto);
+
+export const setSelectedCryptos = (selectedCrypto: []) =>
+	createAction(cryptoActionTypes.SET_SELECTED_CRYPTOS, selectedCrypto);
