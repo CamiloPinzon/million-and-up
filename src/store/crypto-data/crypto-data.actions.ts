@@ -17,5 +17,5 @@ export const setIsModalOpen = (isModalOpen: boolean) =>
 export const setSelectedCrypto = (selectedCrypto: {}) =>
 	createAction(cryptoActionTypes.SET_SELECTED_CRYPTO, selectedCrypto);
 
-export const setSelectedCryptos = (selectedCrypto: []) =>
+export const setSelectedCryptos = (selectedCrypto: [{}]) =>
 	createAction(cryptoActionTypes.SET_SELECTED_CRYPTOS, selectedCrypto);

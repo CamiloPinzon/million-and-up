@@ -11,6 +11,12 @@ import {
 	setSelectedCryptos,
 } from "@/store/crypto-data/crypto-data.actions";
 
+import { CryptosUpdatedT } from "@/types";
+
+interface CryptoInterface {
+	id: string;
+}
+
 const CoinsList = () => {
 	const dispatch = useDispatch();
 	const cryptoData = useSelector(selectCryptoData);
@@ -21,7 +27,7 @@ const CoinsList = () => {
 	const existCrypto = (idToAdd: string) => {
 		if (cryptosSelected.length > 0) {
 			const existingCrypto = cryptosSelected.find(
-				(crypto) => crypto.id === idToAdd
+				(crypto: CryptoInterface) => crypto.id === idToAdd
 			);
 
 			return existingCrypto;
@@ -46,16 +52,19 @@ const CoinsList = () => {
 		const exist = existCrypto(id);
 		if (!exist) {
 			const crypto = await getCryptoFromApi(id);
-			await setSelectedCrypto(crypto);
-			console.log(cryptosSelected);
-			console.log(crypto);
+			setSelectedCrypto(crypto);
 
-			const cryptosUpdated = [...cryptosSelected, crypto];
-			await dispatch(setSelectedCryptos(cryptosUpdated));
-			await dispatch(setSelectedCrypto(crypto));
+			const cryptosUpdated: Array<CryptosUpdatedT> = [
+				...cryptosSelected,
+				crypto,
+			];
+			dispatch(setSelectedCryptos([cryptosUpdated]));
+			dispatch(setSelectedCrypto(crypto));
 		} else {
-			const selected = cryptosSelected.filter((crypto) => crypto.id === id);
-			await dispatch(setSelectedCrypto(selected[0]));
+			const selected = cryptosSelected.filter(
+				(crypto: CryptoInterface) => crypto.id === id
+			);
+			dispatch(setSelectedCrypto(selected[0]));
 		}
 		dispatch(setIsModalOpen(!isModalOpen));
 	};

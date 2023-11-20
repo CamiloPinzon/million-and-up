@@ -1,11 +1,13 @@
+import { CryptoT } from "@/types";
+
 type stateTypeT = {
 	cryptoData: {
 		cryptoData: [];
 		currentPage: number;
 		totalPages: number;
 		isModalOpen: boolean;
-		cryptosSelected: [];
-		selectedCrypto: {};
+		cryptosSelected: Array<CryptoT>;
+		selectedCrypto: CryptoT;
 	};
 };
 

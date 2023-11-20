@@ -45,13 +45,6 @@ body {
   align-items: center;
 }
 
-.search-container {
-  display: flex;
-  justify-content: center;
-  column-gap: 5px;
-  align-items: center;
-}
-
 .paginator-container {
   display: flex;
   column-gap: 20px;

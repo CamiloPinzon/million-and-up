@@ -5,6 +5,8 @@ import {
 	selectSelectedCrypto,
 } from "@/store/crypto-data/crypto-data.selector";
 import { setIsModalOpen } from "@/store/crypto-data/crypto-data.actions";
+import { CryptoT } from "@/types";
+
 import CloseIcon from "@/assets/images/close";
 
 const Modal = () => {
@@ -14,7 +16,7 @@ const Modal = () => {
 		dispatch(setIsModalOpen(!isModalOpen));
 	};
 
-	const selectedCrypto = useSelector(selectSelectedCrypto);
+	const selectedCrypto: CryptoT = useSelector(selectSelectedCrypto);
 
 	const { symbol, name } = selectedCrypto;
 
